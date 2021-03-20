@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :set_order, only: [:show, :update]
+
   def index
   end
 
@@ -6,8 +8,13 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @order = Order.find(params[:id])
     @order.update(packed: true)
     redirect_to orders_path
+  end
+
+  private
+
+  def set_order
+    @order = Order.find(params[:id])
   end
 end
