@@ -14,7 +14,26 @@
       <% box[:items].each do |item| %>
         <%= render 'shared/item_card', :locals => {item: item, box: box} %>
       <% end %>
+      
+      <button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#exampleModal">
+  View this box
+</button>
     </div>
   <% end %>
 
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body p-0 m-0" style="background-color: black;">
+        <button type="button" class="close position-absolute text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div>
+          <%= render '3d_view' %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
