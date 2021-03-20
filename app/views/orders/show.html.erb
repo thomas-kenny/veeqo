@@ -2,6 +2,10 @@
   <% @boxes_hash[:boxes].each do |box| %>
     <%= render "shared/boxcard", :locals => {box: box} %>
     <div class="items">
+      <div class="threed-card collapse" id="collapse<%= box[:name].gsub(" ", "") %>" data-parent="#boxesAccordion">
+        <i class="fas fa-cube"></i>
+        <p id="threed">3D View</p>
+      </div>
       <% box[:items].each do |item| %>
         <%= render 'shared/item_card', :locals => {item: item, box: box} %>
       <% end %>
