@@ -1,9 +1,9 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon d-flex align-items-center">
-  <%= link_to orders_path, class: "navbar-brand" do %>
-    <p class="mb-0"><i class="fas fa-arrow-left"></i></p>
-  <% end %>
-
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon d-flex align-items-center justify-content-center">
   <%  if params[:action] == "show" %>
+    <%= link_to orders_path, class: "navbar-brand" do %>
+      <p class="mb-0"><i class="fas fa-arrow-left"></i></p>
+    <% end %>
+
     <div class="d-flex flex-column justify-content-center">
     <% order = Order.find(params[:id]) %>
       <h1 class="header text-center">ORDER NO. <%= order.name  %> </h1>
@@ -12,17 +12,15 @@
   <% end %>
 
 
-  <%  if params[:action] == "index" %>
-    <div class="d-flex flex-column justify-content-center">
+  <% if params[:action] == "index" %>
+    <!-- <div class="d-flex justify-content-center align-items-center"> -->
       <h1 class="header text-center">ORDERS</h1>
-    </div>
+    <!-- </div> -->
   <% end %>
 
 
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+
 
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
