@@ -1,3 +1,4 @@
+<div id="threed-test"></div>
 <% if @order.note %>
   <div class="note">
     <p class="note-text"><span>Note from customer:</span> <%= @order.note %></p>
@@ -9,15 +10,11 @@
     <div class="items">
       <div class="threed-card collapse" id="collapse<%= box[:name].gsub(" ", "") %>" data-parent="#boxesAccordion">
         <i class="fas fa-cube"></i>
-        <p id="threed">3D View</p>
+        <p id="threed" type="button" data-toggle="modal" data-target="#exampleModal">3D View</p>
       </div>
       <% box[:items].each do |item| %>
         <%= render 'shared/item_card', :locals => {item: item, box: box} %>
       <% end %>
-      
-      <button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#exampleModal">
-  View this box
-</button>
     </div>
   <% end %>
 
