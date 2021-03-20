@@ -2525,9 +2525,11 @@ const threeDView = () => {
 
       renderer = new THREE.WebGLRenderer({ antialias: false });
       renderer.setClearColor(scene.fog.color, 1);
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      // renderer.setSize(window.innerWidth, window.innerHeight);
+      // renderer.setSize(414, 736);
+      renderer.setSize(388, 720);
 
-      container = document.getElementById('container');
+      container = document.getElementById('3d-container');
       container.innerHTML = "";
       container.appendChild(renderer.domElement);
 
@@ -2539,7 +2541,7 @@ const threeDView = () => {
       //container.appendChild( stats.domElement );
       createLegend(container);
 
-      window.addEventListener('resize', onWindowResize, false);
+      // window.addEventListener('resize', onWindowResize, false);
 
     }
 

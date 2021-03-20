@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-    #@boxes_hash = get_packing_data(Box.all, @order.items)
+    @boxes_hash = get_packing_data(Box.all, @order.items)
   end
 
   private
