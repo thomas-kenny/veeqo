@@ -10,16 +10,19 @@
                 <div class="card-product">
                   <div class="order-weight">
                   <h3><%= order.name %></h3>
-                  <p><% %>3kg</p>
+                  <p><%= order.items.map{|x| x.weight}.inject(0){|sum,x| sum + x }/1000.to_f.round(1) %>kg</p>
                   </div>
                   <div class="card-product-infos">
                     <p><strong>Mar 19, 2021</strong></p>
                     <p><%= Time.now.strftime("%H:%M") %></p>
                     <% if order.packed %>
-                        <i class="fas fa-check"><p>Packed</p></i>
-                      <% else %>
-                        <p> Not Packed</p>
-                      <% end %>
+                      <div class="d-flex" style="width: 55px; justify-content: space-between;">
+                        <p>✔</p>
+                        <p>Packed</p>
+                      </div>
+                    <% else %>
+                      <p> Not Packed</p>
+                    <% end %>
                   </div>
                 </div>
               </div>
