@@ -7,7 +7,6 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
     boxes_hash = get_packing_data(Box.all, @order.items)
   end
 
