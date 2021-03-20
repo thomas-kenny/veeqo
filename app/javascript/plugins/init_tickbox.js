@@ -1,11 +1,16 @@
 const tickbox = () => {
-  const tickbox = document.querySelector(".tick-box");
-  const tick = document.querySelector(".tick");
-    if (tickbox) {
-      tickbox.addEventListener("click", () => {
-        tick.classList.toggle("d-none");
+  const tickboxes = document.querySelectorAll(".tick-box");
+
+    if (tickboxes) {
+      tickboxes.forEach((tickbox) => {
+        tickbox.addEventListener("click", () => {
+          tickbox.firstElementChild.classList.toggle("d-none");
+        });
       });
     }
 }
 
 export default tickbox;
+
+
+

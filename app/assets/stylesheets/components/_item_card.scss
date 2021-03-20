@@ -4,8 +4,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 70px 0 70px;
+  padding: 0 10px 0 10px;
   background-color: white;
+  border-top: 1px solid #F2F2F2;
+  border-bottom: 1px solid #F2F2F2;
   p {
     margin: 0;
   }
@@ -14,6 +16,10 @@
 .item-card-right {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 150px;
+  justify-content: flex-end;
+  width: 30%;
+}
+
+#item-name {
+  font-size: 12px;
 }

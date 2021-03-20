@@ -1,9 +1,14 @@
-<div class="boxcard">
-  <h3 class="box-name">MEDIUM BOX 2 <i class="fas fa-cube mr-1 ml-3"></i><span id="threed">3D</span></h3>
-  <h6 id="box-size">28x22x10 | 4 kg</h6>
-  <div class="boxcard-right">
+<div class="boxcard" type="button" data-toggle="collapse" data-target="#collapse<%= locals[:box][:name].gsub(" ", "") %>" aria-expanded="true" aria-controls="collapseOne">
+  <div class="boxcard-left">
+    <h3 class="box-name"><%= locals[:box][:name].upcase %><i class="fas fa-cube mr-1 ml-3"></i><span id="threed">3D</span></h3>
+    <% box_size = Box.find_by(name: locals[:box][:name]) %>
+    <h6 id="box-size"><%= "#{box_size.width / 10.0}x#{box_size.depth / 10.0}x#{box_size.height / 10.0}" %> | <%= "#{box_size.weight_limit / 1000} kg" %></h6>
   </div>
 
-
-
+  <div class="boxcard-right">
+     <% if locals[:box][:contains_fragile] %> <span class="fragile-tag-full">fragile</span> <% end %>
+    <div class="tick-box">
+      <p class="d-none">✔</p>
+    </div>
+  </div>
 </div>
