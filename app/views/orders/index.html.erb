@@ -1,34 +1,26 @@
-<div class="row justify-content-center">
-  <div class="col-sm-12">
-    <div class="orders-list">
-    <h4>Orders to be shipped</h4>
-    </div>
-    <% @orders.each do |order| %>
-      <div class="row justify-content-center">
-        <div class="col-12 col-md-8">
-          <div id="small-card" class="row">
-            <div class="card-product">
-              <div class="order-weight">
-              <h3><%= link_to order.name, order_path(order) %></h3>
-              <% sum = 0 %>
-              <% order.items.each { |item| sum += item.weight} %>
-              <p><%= sum/1000.0 %>kg</p>
+<div class="orders-list">
+  <h4>Orders to be shipped</h4>
+</div>
+<% @orders.each do |order| %>
+      <div id="small-card">
+        <div class="card-product">
+          <div class="order-weight d-flex flex-column justify-content-between">
+            <h3><%= link_to order.name, order_path(order) %></h3>
+            <% sum = 0 %>
+            <% order.items.each { |item| sum += item.weight} %>
+            <p><%= sum/1000.0 %>kg</p>
+          </div>
+          <div class="card-product-infos">
+            <p class="order-date"><%= order.created_at.strftime("%b %d, %Y") %></p>
+            <p class="order-time"><%= order.created_at.strftime("%H:%M") %></p>
+            <% if order.packed %>
+              <div class="packed d-flex">
+                <i class="fas fa-check"></i>
+                <p> Packed</p>
               </div>
-              <div class="card-product-infos">
-                <p><strong><%= order.created_at.strftime("%b %d, %Y")%></strong></p>
-                <p><%= order.created_at.strftime("%H:%M") %></p>
-                <% if order.packed %>
-                    <div class="packed d-flex">
-                      <i class="fas fa-check"></i>
-                      <p> Packed</p>
-                    </div>
-                  <% end %>
-              </div>
-            </div>
+            <% end %>
           </div>
         </div>
       </div>
-    <% end %>
-  </div>
-</div>
+<% end %>
 
