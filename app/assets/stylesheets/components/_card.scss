@@ -7,9 +7,8 @@
   align-items: center;
   width: 100%;
   padding: 20px;
-  // border-top: 1px solid grey;
-  border-bottom: 1px solid grey;
-  // color: #636363 !important;
+  border-top: 2px solid #E5E5E5;
+  color: #636363;
   text-decoration: none;
 }
 
@@ -48,6 +47,15 @@
   font-size: 12px;
 }
 
+.packed {
+  display: flex;
+  margin-bottom: 4px;
 .fa-check {
   color: green;
+  margin-top: 9px;
+  }
+  p {
+    margin-left: 3px;
+    font-weight: bold;
+  }
 }
