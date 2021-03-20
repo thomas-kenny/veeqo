@@ -10,13 +10,12 @@
             <% order.items.each { |item| sum += item.weight} %>
             <p><%= sum/1000.0 %>kg</p>
           </div>
-          <div class="card-product-infos">
+          <div class="card-product-infos d-flex flex-column align-items-end">
             <p class="order-date"><%= order.created_at.strftime("%b %d, %Y") %></p>
             <p class="order-time"><%= order.created_at.strftime("%H:%M") %></p>
             <% if order.packed %>
-              <div class="packed d-flex">
-                <i class="fas fa-check"></i>
-                <p> Packed</p>
+              <div class="packed text-right">
+                <p class="text-right"><i class="fas fa-check"></i>Packed</p>
               </div>
             <% end %>
           </div>
