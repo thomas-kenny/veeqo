@@ -2,10 +2,13 @@
 @import "alert";
 @import "avatar";
 @import "navbar";
+@import "card";
 @import "boxcard";
 @import "item_card";
 @import "fragile_tag";
 @import "tick_box";
+@import "footer";
+@import "3D_card";
 
 .modal-dialog {
   width: 100%;
@@ -19,3 +22,5 @@
   min-height: 100%;
   border-radius: 0;
 }
+
+

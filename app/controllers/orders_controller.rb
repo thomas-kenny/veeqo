@@ -5,12 +5,18 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :update]
 
   def index
+    @orders = Order.all
   end
 
   def show
     @boxes_hash = get_packing_data(Box.all, @order.items)
   end
 
+  def update
+    @order.update(packed: true)
+    redirect_to orders_path
+  end
+  
   private
 
   def get_packing_data(packing_containers, items)
@@ -43,7 +49,7 @@ class OrdersController < ApplicationController
 
     box_hash
   end
-  
+
 
   def boxes_to_url_text(boxes)
     #bins=0:50:5x5x5,1:50:5x5x5
@@ -56,13 +62,6 @@ class OrdersController < ApplicationController
     item_strings = items.map { |item|  "#{ item.id }:0:#{ item.weight / 1000.0 }:#{ item.width / 10.0 }x#{ item.height / 10.0 }x#{ item.depth / 10.0 }" }
     "items=" << item_strings.join(",")
   end
-
-  def update
-    @order.update(packed: true)
-    redirect_to orders_path
-  end
-
-  private
 
   def set_order
     @order = Order.find(params[:id])
