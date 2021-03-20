@@ -28,8 +28,9 @@ import "bootstrap";
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 import tickbox from "../plugins/init_tickbox.js";
-
+import threeDView from "../plugins/init_3d_view.js";
 
 document.addEventListener('turbolinks:load', () => {
   tickbox();
+  threeDView();
 });
