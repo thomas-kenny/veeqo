@@ -2527,7 +2527,7 @@ const threeDView = () => {
       renderer.setClearColor(scene.fog.color, 1);
       // renderer.setSize(window.innerWidth, window.innerHeight);
       // renderer.setSize(414, 736);
-      renderer.setSize(388, 720);
+      renderer.setSize(412, 720);
 
       container = document.getElementById('3d-container');
       container.innerHTML = "";
