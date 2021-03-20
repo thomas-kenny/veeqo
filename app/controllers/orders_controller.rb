@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
       box_weight = box["curr_weight"]
       fragile = items.any? { |item| item.fragile }
 
-      new_hash = { name: box_name, current_weight: box_weight, contains_fragile: fragile, items: items }
+      new_hash = { id: box["id"] , name: box_name, current_weight: box_weight, contains_fragile: fragile, items: items }
 
       if box_hash[:boxes]
         box_hash[:boxes] << new_hash

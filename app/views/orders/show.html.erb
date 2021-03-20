@@ -11,7 +11,7 @@
     <div class="items">
       <div class="threed-card collapse" id="collapse<%= box[:name].gsub(" ", "") %>" data-parent="#boxesAccordion">
         <i class="fas fa-cube"></i>
-        <p id="threed" type="button" data-toggle="modal" data-target="#threed-modal-<%= index %>">3D View</p>
+        <p id="threed" class="threed-button" type="button" data-box-id="<%= box[:id] %>" data-data-toggle="modal" data-target="#threed-modal-<%= index %>">3D View</p>
       </div>
       <% box[:items].each do |item| %>
         <%= render 'shared/item_card', :locals => {item: item, box: box} %>

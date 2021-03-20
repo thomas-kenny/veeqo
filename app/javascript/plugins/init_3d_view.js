@@ -2421,270 +2421,280 @@ const threeDView = () => {
   const threeDView = document.getElementById("threed-test");
 
   if (threeDView) {
-    var packedBins = JSON.parse("[{\"size\": \"5 x 5 x 5\",\"id\": \"0\",\"size_1\": 5,\"size_2\": 5,\"size_3\": 5,\"weight_limit\": 50,\"curr_weight\": 15,\"item_count\": 2,\"items\": [{\"id\": \"1\",\"orig_size\": \"2 x 4 x 2\",\"sp_size\": \"2 x 4 x 2\",\"size_1\": 2,\"size_2\": 4,\"size_3\": 2,\"sp_size_1\": 2,\"sp_size_2\": 4,\"sp_size_3\": 2,\"x_origin_in_bin\": -1.5,\"y_origin_in_bin\": -0.5,\"z_origin_in_bin\": 1.5,\"weight\": 10,\"constraints\": 0},{\"id\": \"0\",\"orig_size\": \"1 x 2 x 3\",\"sp_size\": \"1 x 2 x 3\",\"size_1\": 1,\"size_2\": 2,\"size_3\": 3,\"sp_size_1\": 1,\"sp_size_2\": 2,\"sp_size_3\": 3,\"x_origin_in_bin\": 0,\"y_origin_in_bin\": -1.5,\"z_origin_in_bin\": 1,\"weight\": 5,\"constraints\": 0}]}]");
-    var binIdToRender = "0";
 
-    // if (!Detector.webgl) Detector.addGetWebGLMessage();
+    const buttons = document.querySelectorAll(".threed-button");
 
-    var container, stats;
+    buttons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        
+        var packedBins = JSON.parse(threeDView.dataset.json);
+        // var packedBins = JSON.parse("[{\"size\": \"5 x 5 x 5\",\"id\": \"0\",\"size_1\": 5,\"size_2\": 5,\"size_3\": 5,\"weight_limit\": 50,\"curr_weight\": 15,\"item_count\": 2,\"items\": [{\"id\": \"1\",\"orig_size\": \"2 x 4 x 2\",\"sp_size\": \"2 x 4 x 2\",\"size_1\": 2,\"size_2\": 4,\"size_3\": 2,\"sp_size_1\": 2,\"sp_size_2\": 4,\"sp_size_3\": 2,\"x_origin_in_bin\": -1.5,\"y_origin_in_bin\": -0.5,\"z_origin_in_bin\": 1.5,\"weight\": 10,\"constraints\": 0},{\"id\": \"0\",\"orig_size\": \"1 x 2 x 3\",\"sp_size\": \"1 x 2 x 3\",\"size_1\": 1,\"size_2\": 2,\"size_3\": 3,\"sp_size_1\": 1,\"sp_size_2\": 2,\"sp_size_3\": 3,\"x_origin_in_bin\": 0,\"y_origin_in_bin\": -1.5,\"z_origin_in_bin\": 1,\"weight\": 5,\"constraints\": 0}]}]");
+        var binIdToRender = "9";
+        //console.log(event.currentTarget.dataset.boxId);
+        //const binIdToRender = event.currentTarget.dataset.boxId;
 
-    var camera, controls, scene, renderer;
+        // if (!Detector.webgl) Detector.addGetWebGLMessage();
 
-    var cross;
+        var container, stats;
 
-    var randomColorsUsedAlready = new Object();
-    var itemColorHash = new Object();
+        var camera, controls, scene, renderer;
 
-    var itemType = "normal";
+        var cross;
 
+        var randomColorsUsedAlready = new Object();
+        var itemColorHash = new Object();
 
-    init();
-    animate();
-
-    function init() {
+        var itemType = "normal";
 
 
-      var bin = null;
-      for (var i = 0; i < packedBins.length; i++) {
-        if (packedBins[i].id == binIdToRender) {
-          bin = packedBins[i];
+        init();
+        animate();
+
+        function init() {
+
+          var bin = null;
+          for (var i = 0; i < packedBins.length; i++) {
+            if (packedBins[i].id == binIdToRender) {
+              bin = packedBins[i];
+            }
+          }
+
+
+          if (bin == null) {
+            alert("Error.  Could not find bin");
+            return;
+          }
+
+          if (bin.size_3 == undefined)
+            bin.size_3 = 0.25;
+
+          camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+          camera.position.x = (bin.size_1 + bin.size_2 + bin.size_3) * .25;
+          camera.position.y = (bin.size_1 + bin.size_2 + bin.size_3) * .25;
+          camera.position.z = (bin.size_1 + bin.size_2 + bin.size_3) * .5;
+
+          controls = new THREE.TrackballControls(camera);
+
+          controls.rotateSpeed = 1.0;
+          controls.zoomSpeed = 1.2;
+          controls.panSpeed = 0.8;
+
+          controls.noZoom = false;
+          controls.noPan = false;
+
+          controls.staticMoving = true;
+          controls.dynamicDampingFactor = 0.3;
+
+          controls.keys = [65, 83, 68];
+
+          controls.addEventListener('change', render);
+
+          // world
+
+          scene = new THREE.Scene();
+          scene.fog = new THREE.FogExp2(0x000000, 0.002);
+
+
+
+          var binGeometry = new THREE.CubeGeometry(bin.size_1, bin.size_2, bin.size_3);
+          var binMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff, shading: THREE.SmoothShading, wireframe: true });
+
+          var binMesh = new THREE.Mesh(binGeometry, binMaterial);
+          binMesh.position.x = 0;
+          binMesh.position.y = 0;
+          binMesh.position.z = 0;
+          binMesh.updateMatrix();
+          binMesh.matrixAutoUpdate = false;
+          scene.add(binMesh);
+
+          for (var i = 0; i < bin.items.length; ++i) {
+            drawItems(scene, bin.items[i]);
+          }
+
+
+
+          // lights
+
+          var ambientLight = new THREE.AmbientLight(0x444444);
+          scene.add(ambientLight);
+
+          var pointLight = new THREE.PointLight(0xffffff, 1.25, 1000);
+          pointLight.position.set(0, 0, 600);
+
+          scene.add(pointLight);
+
+          var directionalLight = new THREE.DirectionalLight(0xffffff);
+          directionalLight.position.set(1, -0.5, -1);
+          scene.add(directionalLight);
+
+
+
+          // renderer
+
+          renderer = new THREE.WebGLRenderer({ antialias: false });
+          renderer.setClearColor(scene.fog.color, 1);
+          // renderer.setSize(window.innerWidth, window.innerHeight);
+          // renderer.setSize(414, 736);
+          renderer.setSize(412, 720);
+
+          container = document.getElementById('3d-container');
+          container.innerHTML = "";
+          container.appendChild(renderer.domElement);
+
+          //stats = new Stats();
+          //stats.domElement.style.position = 'absolute';
+          //stats.domElement.style.top = '0px';
+          //stats.domElement.style.zIndex = 100;
+
+          //container.appendChild( stats.domElement );
+          createLegend(container);
+
+          // window.addEventListener('resize', onWindowResize, false);
+
         }
-      }
 
+        function drawItems(scene, item) {
 
-      if (bin == null) {
-        alert("Error.  Could not find bin");
-        return;
-      }
+          var is3sided = true;
+          if (item.sp_size_3 == undefined) {
 
-      if (bin.size_3 == undefined)
-        bin.size_3 = 0.25;
+            item.sp_size_3 = 0.25;
+            is3sided = false;
+          }
+          var itemGeometry = new THREE.CubeGeometry(item.sp_size_1, item.sp_size_2, item.sp_size_3);
 
-      camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
-      camera.position.x = (bin.size_1 + bin.size_2 + bin.size_3) * .25;
-      camera.position.y = (bin.size_1 + bin.size_2 + bin.size_3) * .25;
-      camera.position.z = (bin.size_1 + bin.size_2 + bin.size_3) * .5;
+          var color = randomColor();
 
-      controls = new THREE.TrackballControls(camera);
+          itemColorHash[item.id + " : " + item.sp_size] = color;
 
-      controls.rotateSpeed = 1.0;
-      controls.zoomSpeed = 1.2;
-      controls.panSpeed = 0.8;
+          if (itemType == "normal")
+            var itemMaterial = new THREE.MeshPhongMaterial({ color: color, shading: THREE.SmoothShading });
+          else if (itemType == "wireframe")
+            var itemMaterial = new THREE.MeshPhongMaterial({ color: color, shading: THREE.SmoothShading, wireframe: true });
+          else if (itemType == "transparent")
+            var itemMaterial = new THREE.MeshPhongMaterial({ color: color, shading: THREE.SmoothShading, transparent: true, opacity: 0.8 });
 
-      controls.noZoom = false;
-      controls.noPan = false;
+          itemMaterial.name = item.id;
+          var itemMesh = new THREE.Mesh(itemGeometry, itemMaterial);
 
-      controls.staticMoving = true;
-      controls.dynamicDampingFactor = 0.3;
+          itemMesh.position.x = item.x_origin_in_bin;
+          itemMesh.position.y = item.y_origin_in_bin;
+          if (is3sided)
+            itemMesh.position.z = item.z_origin_in_bin;
 
-      controls.keys = [65, 83, 68];
 
-      controls.addEventListener('change', render);
-
-      // world
-
-      scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x000000, 0.002);
-
-
-
-      var binGeometry = new THREE.CubeGeometry(bin.size_1, bin.size_2, bin.size_3);
-      var binMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff, shading: THREE.SmoothShading, wireframe: true });
-
-      var binMesh = new THREE.Mesh(binGeometry, binMaterial);
-      binMesh.position.x = 0;
-      binMesh.position.y = 0;
-      binMesh.position.z = 0;
-      binMesh.updateMatrix();
-      binMesh.matrixAutoUpdate = false;
-      scene.add(binMesh);
-
-      for (var i = 0; i < bin.items.length; ++i) {
-        drawItems(scene, bin.items[i]);
-      }
-
-
-
-      // lights
-
-      var ambientLight = new THREE.AmbientLight(0x444444);
-      scene.add(ambientLight);
-
-      var pointLight = new THREE.PointLight(0xffffff, 1.25, 1000);
-      pointLight.position.set(0, 0, 600);
-
-      scene.add(pointLight);
-
-      var directionalLight = new THREE.DirectionalLight(0xffffff);
-      directionalLight.position.set(1, -0.5, -1);
-      scene.add(directionalLight);
-
-
-
-      // renderer
-
-      renderer = new THREE.WebGLRenderer({ antialias: false });
-      renderer.setClearColor(scene.fog.color, 1);
-      // renderer.setSize(window.innerWidth, window.innerHeight);
-      // renderer.setSize(414, 736);
-      renderer.setSize(412, 720);
-
-      container = document.getElementById('3d-container');
-      container.innerHTML = "";
-      container.appendChild(renderer.domElement);
-
-      //stats = new Stats();
-      //stats.domElement.style.position = 'absolute';
-      //stats.domElement.style.top = '0px';
-      //stats.domElement.style.zIndex = 100;
-
-      //container.appendChild( stats.domElement );
-      createLegend(container);
-
-      // window.addEventListener('resize', onWindowResize, false);
-
-    }
-
-    function drawItems(scene, item) {
-
-      var is3sided = true;
-      if (item.sp_size_3 == undefined) {
-
-        item.sp_size_3 = 0.25;
-        is3sided = false;
-      }
-      var itemGeometry = new THREE.CubeGeometry(item.sp_size_1, item.sp_size_2, item.sp_size_3);
-
-      var color = randomColor();
-
-      itemColorHash[item.id + " : " + item.sp_size] = color;
-
-      if (itemType == "normal")
-        var itemMaterial = new THREE.MeshPhongMaterial({ color: color, shading: THREE.SmoothShading });
-      else if (itemType == "wireframe")
-        var itemMaterial = new THREE.MeshPhongMaterial({ color: color, shading: THREE.SmoothShading, wireframe: true });
-      else if (itemType == "transparent")
-        var itemMaterial = new THREE.MeshPhongMaterial({ color: color, shading: THREE.SmoothShading, transparent: true, opacity: 0.8 });
-
-      itemMaterial.name = item.id;
-      var itemMesh = new THREE.Mesh(itemGeometry, itemMaterial);
-
-      itemMesh.position.x = item.x_origin_in_bin;
-      itemMesh.position.y = item.y_origin_in_bin;
-      if (is3sided)
-        itemMesh.position.z = item.z_origin_in_bin;
-
-
-      itemMesh.updateMatrix();
-      itemMesh.matrixAutoUpdate = false;
-      scene.add(itemMesh);
-
-
-
-    }
-
-
-    function randomColor() {
-
-      var color = '#' + Math.floor(Math.random() * 16777215).toString(16);
-
-      if (randomColorsUsedAlready[color] == true)
-        randomColor();
-      else
-        randomColorsUsedAlready[color] = true;
-
-      return color;
-    }
-
-    function createLegend(container) {
-      var legend = document.createElement('div');
-      var table = document.createElement('table');
-      var headerrow = document.createElement('tr');
-      var headercell = document.createElement('td');
-      headercell.colSpan = 3;
-      headercell.innerHTML = "contents legend";
-
-      headerrow.appendChild(headercell);
-      table.appendChild(headerrow);
-
-      var hrrow = document.createElement('tr');
-      var hrcell = document.createElement('td');
-      hrcell.colSpan = 3;
-
-      hrcell.appendChild(document.createElement('hr'));
-      hrrow.appendChild(hrcell);
-      table.appendChild(hrrow);
-
-      legend.appendChild(table);
-
-      for (var key in itemColorHash) {
-        if (itemColorHash.hasOwnProperty(key)) {
-
-          var row = document.createElement('tr');
-          var key_cell = document.createElement('td');
-          var sep_cell = document.createElement('td');
-          var color_cell = document.createElement('td');
-
-          key_cell.innerHTML = key;
-
-          sep_cell.innerHTML = "=";
-
-
-          var color_div = document.createElement('span');
-          color_div.style.height = '10px'
-          color_div.style.width = '10px'
-          color_div.style.background = itemColorHash[key];
-          color_div.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-
-          color_cell.appendChild(color_div);
-
-          row.appendChild(key_cell);
-          row.appendChild(sep_cell);
-          row.appendChild(color_cell);
-          table.appendChild(row);
+          itemMesh.updateMatrix();
+          itemMesh.matrixAutoUpdate = false;
+          scene.add(itemMesh);
 
 
 
         }
-      }
-
-      legend.style.position = 'absolute';
-      legend.style.top = '100px';
-      legend.style.color = "#ffffff";
-      legend.style.fontSize = "12px";
-      legend.style.zIndex = 100;
-
-      container.appendChild(legend);
 
 
-    }
+        function randomColor() {
 
-    function onWindowResize() {
+          var color = '#' + Math.floor(Math.random() * 16777215).toString(16);
 
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
+          if (randomColorsUsedAlready[color] == true)
+            randomColor();
+          else
+            randomColorsUsedAlready[color] = true;
 
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      
-      controls.handleResize();
+          return color;
+        }
 
-      render();
+        function createLegend(container) {
+          var legend = document.createElement('div');
+          var table = document.createElement('table');
+          var headerrow = document.createElement('tr');
+          var headercell = document.createElement('td');
+          headercell.colSpan = 3;
+          headercell.innerHTML = "contents legend";
 
-    }
+          headerrow.appendChild(headercell);
+          table.appendChild(headerrow);
 
-    function animate() {
+          var hrrow = document.createElement('tr');
+          var hrcell = document.createElement('td');
+          hrcell.colSpan = 3;
 
-      requestAnimationFrame(animate);
-      controls.update();
+          hrcell.appendChild(document.createElement('hr'));
+          hrrow.appendChild(hrcell);
+          table.appendChild(hrrow);
 
-    }
+          legend.appendChild(table);
 
-    function render() {
+          for (var key in itemColorHash) {
+            if (itemColorHash.hasOwnProperty(key)) {
 
-      renderer.render(scene, camera);
-      //stats.update();
+              var row = document.createElement('tr');
+              var key_cell = document.createElement('td');
+              var sep_cell = document.createElement('td');
+              var color_cell = document.createElement('td');
 
-    }
+              key_cell.innerHTML = key;
+
+              sep_cell.innerHTML = "=";
+
+
+              var color_div = document.createElement('span');
+              color_div.style.height = '10px'
+              color_div.style.width = '10px'
+              color_div.style.background = itemColorHash[key];
+              color_div.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+
+              color_cell.appendChild(color_div);
+
+              row.appendChild(key_cell);
+              row.appendChild(sep_cell);
+              row.appendChild(color_cell);
+              table.appendChild(row);
+
+
+
+            }
+          }
+
+          legend.style.position = 'absolute';
+          legend.style.top = '100px';
+          legend.style.color = "#ffffff";
+          legend.style.fontSize = "12px";
+          legend.style.zIndex = 100;
+
+          container.appendChild(legend);
+
+
+        }
+
+        function onWindowResize() {
+
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+
+          renderer.setSize(window.innerWidth, window.innerHeight);
+          
+          controls.handleResize();
+
+          render();
+
+        }
+
+        function animate() {
+
+          requestAnimationFrame(animate);
+          controls.update();
+
+        }
+
+        function render() {
+
+          renderer.render(scene, camera);
+          //stats.update();
+
+        }
+      });
+    });
   }
 }
 
