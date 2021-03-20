@@ -3,6 +3,7 @@
   height: 60px;
   width: 100%;
   padding: 10px 10px;
+  margin:  5px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -22,13 +23,6 @@
 .fa-cube {
   color: rgb(255, 169, 169);
   margin: 0;
-}
-
-#threed {
-  color: white;
-  font-size: 12px;
-  margin: 0;
-  font-weight: 700;
 }
 
 #box-size  {

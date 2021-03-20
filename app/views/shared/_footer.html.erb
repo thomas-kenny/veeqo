@@ -2,7 +2,7 @@
   <% if params[:action] == "index" %>
     <h3>NEW ORDER</h3>
   <% elsif params[:action] == "show" %>
-    <h3>CONFIRM</h3>
+    <h3><%= link_to "CONFIRM", order_path(@order), method: :patch, data: { confirm: "Are you sure?" } %></h3>
   <% else %>
     <h3>BACK</h3>
     <% end %>
