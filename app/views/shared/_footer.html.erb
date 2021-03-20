@@ -1,5 +1,5 @@
 <%= link_to order_path(@order), method: :patch, data: { confirm: "Are you sure?" } do %>
-<div class="footer">
+<div class="footer mt-4">
   <% if params[:action] == "show" %>
     <h3>CONFIRM</h3>
   <% end %>
