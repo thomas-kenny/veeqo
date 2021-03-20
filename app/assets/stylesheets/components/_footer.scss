@@ -1,0 +1,13 @@
+.page-container {
+  display: grid;
+  min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
+}
+
+.footer {
+  background-color: #009AED;
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 20px;
+  padding: 20px;
+}
