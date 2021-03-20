@@ -115,9 +115,9 @@ GEM
     minitest (5.14.4)
     msgpack (1.4.2)
     nio4r (2.5.7)
-    nokogiri (1.11.2-x86_64-linux)
     nokogiri (1.11.2-x86_64-darwin)
       racc (~> 1.4)
+    nokogiri (1.11.2-x86_64-linux)
     orm_adapter (0.5.0)
     pg (1.2.3)
     pry (0.13.1)
@@ -231,9 +231,9 @@ GEM
     zeitwerk (2.4.2)
 
 PLATFORMS
-  x86_64-linux
+  x86_64-darwin-18
   x86_64-darwin-20
-
+  x86_64-linux
 
 DEPENDENCIES
   autoprefixer-rails
