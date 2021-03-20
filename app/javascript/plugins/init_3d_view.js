@@ -2421,17 +2421,26 @@ const threeDView = () => {
   const threeDView = document.getElementById("threed-test");
 
   if (threeDView) {
+    const threedContainer = document.getElementById('threed-container');
+    const threedClose = document.getElementById('three-container-close');
+
+    threedClose.addEventListener("click", (event) => {
+      threedContainer.classList.toggle("d-none");
+      threedClose.classList.toggle("d-none");
+    });
 
     const buttons = document.querySelectorAll(".threed-button");
 
     buttons.forEach((button) => {
       button.addEventListener("click", (event) => {
-        
+
+        threedContainer.classList.toggle("d-none");
+        threedClose.classList.toggle("d-none");
+
         var packedBins = JSON.parse(threeDView.dataset.json);
         // var packedBins = JSON.parse("[{\"size\": \"5 x 5 x 5\",\"id\": \"0\",\"size_1\": 5,\"size_2\": 5,\"size_3\": 5,\"weight_limit\": 50,\"curr_weight\": 15,\"item_count\": 2,\"items\": [{\"id\": \"1\",\"orig_size\": \"2 x 4 x 2\",\"sp_size\": \"2 x 4 x 2\",\"size_1\": 2,\"size_2\": 4,\"size_3\": 2,\"sp_size_1\": 2,\"sp_size_2\": 4,\"sp_size_3\": 2,\"x_origin_in_bin\": -1.5,\"y_origin_in_bin\": -0.5,\"z_origin_in_bin\": 1.5,\"weight\": 10,\"constraints\": 0},{\"id\": \"0\",\"orig_size\": \"1 x 2 x 3\",\"sp_size\": \"1 x 2 x 3\",\"size_1\": 1,\"size_2\": 2,\"size_3\": 3,\"sp_size_1\": 1,\"sp_size_2\": 2,\"sp_size_3\": 3,\"x_origin_in_bin\": 0,\"y_origin_in_bin\": -1.5,\"z_origin_in_bin\": 1,\"weight\": 5,\"constraints\": 0}]}]");
-        var binIdToRender = "9";
-        //console.log(event.currentTarget.dataset.boxId);
-        //const binIdToRender = event.currentTarget.dataset.boxId;
+       // var binIdToRender = "9";
+        const binIdToRender = event.currentTarget.dataset.boxId;
 
         // if (!Detector.webgl) Detector.addGetWebGLMessage();
 
@@ -2535,9 +2544,9 @@ const threeDView = () => {
           renderer.setClearColor(scene.fog.color, 1);
           // renderer.setSize(window.innerWidth, window.innerHeight);
           // renderer.setSize(414, 736);
-          renderer.setSize(412, 720);
+          renderer.setSize(414, 720);
 
-          container = document.getElementById('3d-container');
+          container = document.getElementById('threed-container');
           container.innerHTML = "";
           container.appendChild(renderer.domElement);
 
