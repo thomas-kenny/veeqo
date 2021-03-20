@@ -16,7 +16,9 @@
       <div class="navbar-container"><%= render 'shared/navbar' %></div>
       <%= render 'shared/flashes' %>
       <div class="content-container"><%= yield %></div>
-      <div class="footer-container"><%= render 'shared/footer' %></div>
+      <% if params[:action] == "show" %>
+        <div class="footer-container"><%= render 'shared/footer' %></div>
+      <% end %>
     </div>
   </body>
 </html>
