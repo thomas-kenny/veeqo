@@ -1,0 +1,9 @@
+<div class="footer">
+  <% if params[:action] == "index" %>
+    <h3>NEW ORDER</h3>
+  <% elsif params[:action] == "show" %>
+    <h3>CONFIRM</h3>
+  <% else %>
+    <h3>BACK</h3>
+    <% end %>
+</div>

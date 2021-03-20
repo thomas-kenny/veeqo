@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
 
     box_hash
   end
-  
+
 
   def boxes_to_url_text(boxes)
     #bins=0:50:5x5x5,1:50:5x5x5
