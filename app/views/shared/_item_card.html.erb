@@ -1,7 +1,9 @@
-<div class="item-card">
-  <p id="item-name">1x Sweet Jam Present</p>
+<div class="item-card collapse" id="collapse<%= locals[:box][:name].gsub(" ", "") %>" data-parent="#boxesAccordion">
+  <p>1x <%= locals[:item].name %></p>
   <div class="item-card-right">
-    <p class="fragile-tag-empty">fragile</p>
+    <% if locals[:item].fragile? %>
+      <p class="fragile-tag-empty">fragile</p>
+    <% end %>
     <div class="tick-box">
       <p class="d-none">✔</p>
     </div>
