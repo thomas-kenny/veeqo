@@ -9,6 +9,7 @@
   padding: 10px;
   border-top: 1px solid #F2F2F2;
   border-bottom: 1px solid #F2F2F2;
+  color: #636363;
   text-decoration: none;
 }
 
@@ -54,8 +55,17 @@
   }
 }
 
+.packed {
+  display: flex;
+  margin-bottom: 4px;
 .fa-check {
   color: green;
+  margin-top: 9px;
+  }
+  p {
+    margin-left: 3px;
+    font-weight: bold;
+  }
 }
 
 .order-date {

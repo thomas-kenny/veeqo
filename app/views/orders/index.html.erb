@@ -6,13 +6,18 @@
         <div class="card-product">
           <div class="order-weight d-flex flex-column justify-content-between">
             <h3><%= link_to order.name, order_path(order) %></h3>
-            <p><% %>3kg</p>
+            <% sum = 0 %>
+            <% order.items.each { |item| sum += item.weight} %>
+            <p><%= sum/1000.0 %>kg</p>
           </div>
           <div class="card-product-infos">
             <p class="order-date"><%= order.created_at.strftime("%b %d, %Y") %></p>
             <p class="order-time"><%= order.created_at.strftime("%H:%M") %></p>
             <% if order.packed %>
-                <i class="fas fa-check"><p>Packed</p></i>
+              <div class="packed d-flex">
+                <i class="fas fa-check"></i>
+                <p> Packed</p>
+              </div>
             <% end %>
           </div>
         </div>
