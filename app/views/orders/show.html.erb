@@ -1,0 +1,13 @@
+<%= render 'shared/item_card' %>
+<%= link_to "Finish order",
+
+            order_path(@order),
+            method: :patch,
+            data: { confirm: "Are you sure?" } %>
+
+
+
+
+
+
+<%= render "shared/boxcard" %>
