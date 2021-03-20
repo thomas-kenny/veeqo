@@ -1,3 +1,8 @@
+<% if @order.note %>
+  <div class="note">
+    <p class="note-text"><span>Note from customer:</span> <%= @order.note %></p>
+  </div>
+<% end %>
 <div class="container accordion" id="boxesAccordion">
   <% @boxes_hash[:boxes].each do |box| %>
     <%= render "shared/boxcard", :locals => {box: box} %>
