@@ -1,0 +1,19 @@
+.item-card {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 70px 0 70px;
+  background-color: white;
+  p {
+    margin: 0;
+  }
+}
+
+.item-card-right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 150px;
+}
