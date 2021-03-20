@@ -1,4 +1,5 @@
-<div id="threed-test"></div>
+<div id="threed-test" data-json="<%= @box_json.to_json %>" ></div>
+
 <% if @order.note %>
   <div class="note">
     <p class="note-text"><span>Note from customer:</span> <%= @order.note %></p>

@@ -9,7 +9,9 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @boxes_hash = get_packing_data(Box.all, @order.items)
+    response = get_packing_data(Box.all, @order.items)
+    @box_json = response[:json]
+    @boxes_hash = response[:hash]
   end
 
   def update
@@ -47,7 +49,7 @@ class OrdersController < ApplicationController
       end
     end
 
-    box_hash
+    { hash: box_hash, json: boxes_with_items }
   end
 
 
