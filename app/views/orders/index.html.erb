@@ -10,13 +10,18 @@
             <div class="card-product">
               <div class="order-weight">
               <h3><%= link_to order.name, order_path(order) %></h3>
-              <p><% %>3kg</p>
+              <% sum = 0 %>
+              <% order.items.each { |item| sum += item.weight} %>
+              <p><%= sum/1000.0 %>kg</p>
               </div>
               <div class="card-product-infos">
-                <p><strong>Mar 19, 2021</strong></p>
-                <p><%= Time.now.strftime("%H:%M") %></p>
+                <p><strong><%= order.created_at.strftime("%b %d, %Y")%></strong></p>
+                <p><%= order.created_at.strftime("%H:%M") %></p>
                 <% if order.packed %>
-                    <i class="fas fa-check"><p>Packed</p></i>
+                    <div class="packed d-flex">
+                      <i class="fas fa-check"></i>
+                      <p> Packed</p>
+                    </div>
                   <% end %>
               </div>
             </div>
