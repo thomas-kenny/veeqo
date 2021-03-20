@@ -49,8 +49,8 @@ paint_can = Item.create(name: 'paint can', width: 150, depth: 120, height: 150, 
 
 puts "creating orders"
 
-order1 = Order.create(name: '#APR1030510579')
-order2 = Order.create(name: '#ATR1329508606')
+order1 = Order.create(name: '#APR1030510579', note: 'Customer called in to ask for order to be gift wrapped.')
+order2 = Order.create(name: '#ATR1329508606', note: 'Leave parcel in garage')
 order3 = Order.create(name: '#APR1094869139')
 order4 = Order.create(name: '#AQQ1948012035')
 order5 = Order.create(name: '#ATS1290385018')
