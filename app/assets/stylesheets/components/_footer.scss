@@ -5,9 +5,9 @@
 }
 
 .footer {
+  min-height: 70px;
   a {
     color: #FFFFFF;
-    text-decoration: none;
   }
   background-color: #009AED;
   text-align: center;
@@ -17,5 +17,9 @@
   h3 {
     margin: 0;
     font-size: 20px;
+  }
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
   }
 }
