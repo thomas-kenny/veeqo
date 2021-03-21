@@ -2631,6 +2631,8 @@ const threeDView = () => {
           headercell.colSpan = 3;
 
           headercell.innerHTML =`${binName}'s items:`;
+          headercell.style.fontWeight = 'bold'
+          headercell.style.fontSize = "16px";
 
           headerrow.appendChild(headercell);
           table.appendChild(headerrow);
