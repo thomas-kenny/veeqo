@@ -2,9 +2,8 @@
   <div class="boxcard-left">
     <h3 class="box-name"><%= locals[:box][:name].upcase %></h3>
     <% box_size = Box.find_by(name: locals[:box][:name]) %>
-    <h6 id="box-size"><%= "#{box_size.width / 10.0}x#{box_size.depth / 10.0}x#{box_size.height / 10.0}" %> | <%= "#{box_size.weight_limit / 1000} kg" %></h6>
+    <h6 id="box-size"><%= "#{box_size.width / 10.0}x#{box_size.depth / 10.0}x#{box_size.height / 10.0}" %> | <%= locals[:box][:current_weight] %> kg</h6>
   </div>
-
   <div class="boxcard-right">
      <% if locals[:box][:contains_fragile] %> <span class="fragile-tag-full">fragile</span> <% end %>
     <div class="tick-box">
