@@ -2479,9 +2479,9 @@ const threeDView = () => {
             bin.size_3 = 0.25;
 
           camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
-          camera.position.x = (bin.size_1 + bin.size_2 + bin.size_3) * .25;
-          camera.position.y = (bin.size_1 + bin.size_2 + bin.size_3) * .25;
-          camera.position.z = (bin.size_1 + bin.size_2 + bin.size_3) * .5;
+          camera.position.x = (bin.size_1 + bin.size_2 + bin.size_3) * .7;
+          camera.position.y = (bin.size_1 + bin.size_2 + bin.size_3) * .7;
+          camera.position.z = (bin.size_1 + bin.size_2 + bin.size_3) * .7;
 
           controls = new THREE.TrackballControls(camera);
 
@@ -2502,12 +2502,12 @@ const threeDView = () => {
           // world
 
           scene = new THREE.Scene();
-          scene.fog = new THREE.FogExp2(0x000000, 0.002);
+          scene.fog = new THREE.FogExp2(0xffffff, 0.002);
 
 
 
           var binGeometry = new THREE.CubeGeometry(bin.size_1, bin.size_2, bin.size_3);
-          var binMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff, shading: THREE.SmoothShading, wireframe: true });
+          var binMaterial = new THREE.MeshPhongMaterial({ color: 0x000000, shading: THREE.SmoothShading, wireframe: true });
 
           var binMesh = new THREE.Mesh(binGeometry, binMaterial);
           binMesh.position.x = 0;
@@ -2575,6 +2575,7 @@ const threeDView = () => {
           var itemGeometry = new THREE.CubeGeometry(item.sp_size_1, item.sp_size_2, item.sp_size_3);
 
           var color = randomColor();
+
 
           //itemColorHash[`${item.name} : ${item.sp_size_1}cm x ${item.sp_size_2}cm x ${item.sp_size_3}cm`] = color;
           //itemColorHash[item.id + " : " + item.sp_size_1] = color;
@@ -2644,6 +2645,7 @@ const threeDView = () => {
 
           legend.appendChild(table);
 
+
           //for (var key in itemColorHash) {
           itemColorHash.forEach((itemHash) => {
             //if (itemColorHash.hasOwnProperty(key)) {
@@ -2676,7 +2678,7 @@ const threeDView = () => {
           legend.style.position = 'absolute';
           legend.style.top = '8px';
           legend.style.left = '8px';
-          legend.style.color = "#ffffff";
+          legend.style.color = "#000000";
           legend.style.fontSize = "12px";
           legend.style.zIndex = 100;
 
