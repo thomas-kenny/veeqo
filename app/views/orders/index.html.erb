@@ -9,7 +9,7 @@
             <h3><%= order.name %></h3>
             <% sum = 0 %>
             <% order.items.each { |item| sum += item.weight} %>
-            <p><%= sum/1000.0 %>kg</p>
+            <p><%= sum/1000.0 %> kg</p>
           </div>
           <div class="card-product-infos d-flex flex-column align-items-end">
             <p class="order-date"><%= order.created_at.strftime("%b %d, %Y") %></p>
@@ -30,7 +30,7 @@
             <h3><%= order.name %></h3>
             <% sum = 0 %>
             <% order.items.each { |item| sum += item.weight} %>
-            <p><%= sum/1000.0 %>kg</p>
+            <p><%= sum/1000.0 %> kg</p>
           </div>
           <div class="card-product-infos d-flex flex-column align-items-end">
             <p class="order-date"><%= order.created_at.strftime("%b %d, %Y") %></p>
