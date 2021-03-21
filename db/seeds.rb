@@ -51,10 +51,10 @@ mini_fridge = Item.create(name: 'Mini Fridge', width: 500, depth: 400, height: 3
 
 puts "creating orders"
 
-order1 = Order.create(name: '#APR1030510579', note: 'Customer called in to ask for order to be gift wrapped.')
+order1 = Order.create(name: '#APR1030510579')
 order2 = Order.create(name: '#ATR1329508606', note: 'Extra padding on the wine glass please')
 order3 = Order.create(name: '#APR1094869139', packed: true)
-order4 = Order.create(name: '#AQQ1948012035')
+order4 = Order.create(name: '#AQQ1948012035', note: 'Customer called in to ask for order to be gift wrapped.')
 order5 = Order.create(name: '#ATS1290385018', packed: true)
 
 puts "creating order items"
