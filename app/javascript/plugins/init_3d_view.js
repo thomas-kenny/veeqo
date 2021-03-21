@@ -2438,6 +2438,7 @@ const threeDView = () => {
         threedClose.classList.toggle("d-none");
 
         var packedBins = JSON.parse(threeDView.dataset.json);
+
         // var packedBins = JSON.parse("[{\"size\": \"5 x 5 x 5\",\"id\": \"0\",\"size_1\": 5,\"size_2\": 5,\"size_3\": 5,\"weight_limit\": 50,\"curr_weight\": 15,\"item_count\": 2,\"items\": [{\"id\": \"1\",\"orig_size\": \"2 x 4 x 2\",\"sp_size\": \"2 x 4 x 2\",\"size_1\": 2,\"size_2\": 4,\"size_3\": 2,\"sp_size_1\": 2,\"sp_size_2\": 4,\"sp_size_3\": 2,\"x_origin_in_bin\": -1.5,\"y_origin_in_bin\": -0.5,\"z_origin_in_bin\": 1.5,\"weight\": 10,\"constraints\": 0},{\"id\": \"0\",\"orig_size\": \"1 x 2 x 3\",\"sp_size\": \"1 x 2 x 3\",\"size_1\": 1,\"size_2\": 2,\"size_3\": 3,\"sp_size_1\": 1,\"sp_size_2\": 2,\"sp_size_3\": 3,\"x_origin_in_bin\": 0,\"y_origin_in_bin\": -1.5,\"z_origin_in_bin\": 1,\"weight\": 5,\"constraints\": 0}]}]");
        // var binIdToRender = "9";
         const binIdToRender = event.currentTarget.dataset.boxId;
@@ -2573,8 +2574,8 @@ const threeDView = () => {
           var itemGeometry = new THREE.CubeGeometry(item.sp_size_1, item.sp_size_2, item.sp_size_3);
 
           var color = randomColor();
-          console.log(item)
-          itemColorHash[`${item.id} : ${item.sp_size_1}cm x ${item.sp_size_2}cm x ${item.sp_size_3}cm`] = color;
+
+          itemColorHash[`${item.name} : ${item.sp_size_1}cm x ${item.sp_size_2}cm x ${item.sp_size_3}cm`] = color;
           //itemColorHash[item.id + " : " + item.sp_size_1] = color;
 
           if (itemType == "normal")
@@ -2637,7 +2638,7 @@ const threeDView = () => {
 
           for (var key in itemColorHash) {
             if (itemColorHash.hasOwnProperty(key)) {
-              console.log(key)
+
               var row = document.createElement('tr');
               var key_cell = document.createElement('td');
               var sep_cell = document.createElement('td');
@@ -2656,13 +2657,10 @@ const threeDView = () => {
 
               color_cell.appendChild(color_div);
 
-              row.appendChild(key_cell);
-              row.appendChild(sep_cell);
               row.appendChild(color_cell);
+              row.appendChild(key_cell);
+              // row.appendChild(sep_cell);
               table.appendChild(row);
-
-
-
             }
           }
 
