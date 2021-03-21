@@ -34,7 +34,12 @@ class OrdersController < ApplicationController
 
     boxes_with_items.each do |box|
       items = []
-      box["items"].each { |item| items << Item.find(item["id"]) }
+      box["items"].each do |box_item|
+        item_instance = Item.find(box_item["id"])
+        box_item["name"] = item_instance.name
+        items << item_instance
+      
+      end
 
       box_name = Box.find(box["id"]).name
       box[:name] = box_name
