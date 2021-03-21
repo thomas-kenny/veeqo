@@ -2452,7 +2452,7 @@ const threeDView = () => {
         var cross;
 
         var randomColorsUsedAlready = new Object();
-        var itemColorHash = new Object();
+        var itemColorHash = new Array();
 
         var itemType = "normal";
 
@@ -2557,8 +2557,9 @@ const threeDView = () => {
           //stats.domElement.style.zIndex = 100;
 
           //container.appendChild( stats.domElement );
-          createLegend(container);
-
+          
+          createLegend(bin.name, container);
+          
           // window.addEventListener('resize', onWindowResize, false);
 
         }
@@ -2575,8 +2576,14 @@ const threeDView = () => {
 
           var color = randomColor();
 
-          itemColorHash[`${item.name} : ${item.sp_size_1}cm x ${item.sp_size_2}cm x ${item.sp_size_3}cm`] = color;
+          //itemColorHash[`${item.name} : ${item.sp_size_1}cm x ${item.sp_size_2}cm x ${item.sp_size_3}cm`] = color;
           //itemColorHash[item.id + " : " + item.sp_size_1] = color;
+          let itemHash = {
+                          title: `${item.name.charAt(0).toUpperCase() + item.name.slice(1)} : ${item.sp_size_1}cm x ${item.sp_size_2}cm x ${item.sp_size_3}cm`,
+                          color: color
+                          }
+
+          itemColorHash.push(itemHash)
 
           if (itemType == "normal")
             var itemMaterial = new THREE.MeshPhongMaterial({ color: color, shading: THREE.SmoothShading });
@@ -2615,13 +2622,14 @@ const threeDView = () => {
           return color;
         }
 
-        function createLegend(container) {
+        function createLegend(binName, container) {
           var legend = document.createElement('div');
           var table = document.createElement('table');
           var headerrow = document.createElement('tr');
           var headercell = document.createElement('td');
           headercell.colSpan = 3;
-          headercell.innerHTML = "Items:";
+
+          headercell.innerHTML =`${binName}'s items:`;
 
           headerrow.appendChild(headercell);
           table.appendChild(headerrow);
@@ -2636,15 +2644,16 @@ const threeDView = () => {
 
           legend.appendChild(table);
 
-          for (var key in itemColorHash) {
-            if (itemColorHash.hasOwnProperty(key)) {
+          //for (var key in itemColorHash) {
+          itemColorHash.forEach((itemHash) => {
+            //if (itemColorHash.hasOwnProperty(key)) {
 
               var row = document.createElement('tr');
               var key_cell = document.createElement('td');
               var sep_cell = document.createElement('td');
               var color_cell = document.createElement('td');
 
-              key_cell.innerHTML = key;
+              key_cell.innerHTML = itemHash.title;
 
               sep_cell.innerHTML = "=";
 
@@ -2652,7 +2661,7 @@ const threeDView = () => {
               var color_div = document.createElement('span');
               color_div.style.height = '10px'
               color_div.style.width = '10px'
-              color_div.style.background = itemColorHash[key];
+              color_div.style.background = itemHash.color;
               color_div.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 
               color_cell.appendChild(color_div);
@@ -2661,8 +2670,8 @@ const threeDView = () => {
               row.appendChild(key_cell);
               // row.appendChild(sep_cell);
               table.appendChild(row);
-            }
-          }
+            // }
+          });
 
           legend.style.position = 'absolute';
           legend.style.top = '8px';
