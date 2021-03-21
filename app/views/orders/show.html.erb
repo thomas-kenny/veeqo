@@ -1,36 +1,24 @@
-<div id="threed-test"></div>
+<div id="threed-test" data-json="<%= @box_json.to_json %>" ></div>
+
 <% if @order.note %>
   <div class="note">
     <p class="note-text"><span>Note from customer:</span> <%= @order.note %></p>
   </div>
 <% end %>
 <div class="container accordion" id="boxesAccordion">
-  <% @boxes_hash[:boxes].each do |box| %>
+  <% @boxes_hash[:boxes].each_with_index do |box, index| %>
     <%= render "shared/boxcard", :locals => {box: box} %>
     <div class="items">
       <div class="threed-card collapse" id="collapse<%= box[:name].gsub(" ", "") %>" data-parent="#boxesAccordion">
         <i class="fas fa-cube"></i>
-        <p id="threed" type="button" data-toggle="modal" data-target="#exampleModal">3D View</p>
+        <p id="threed" class="threed-button" type="button" data-box-id="<%= box[:id] %>">3D View</p>
       </div>
       <% box[:items].each do |item| %>
         <%= render 'shared/item_card', :locals => {item: item, box: box} %>
       <% end %>
     </div>
   <% end %>
-
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body p-0 m-0" style="background-color: black;">
-        <button type="button" class="close position-absolute text-white" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <div>
-          <%= render '3d_view' %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render '3d_view' %>
+

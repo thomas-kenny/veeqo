@@ -9,7 +9,9 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @boxes_hash = get_packing_data(Box.all, @order.items)
+    response = get_packing_data(Box.all, @order.items)
+    @box_json = response[:json]
+    @boxes_hash = response[:hash]
   end
 
   def update
@@ -35,10 +37,11 @@ class OrdersController < ApplicationController
       box["items"].each { |item| items << Item.find(item["id"]) }
 
       box_name = Box.find(box["id"]).name
+      box[:name] = box_name
       box_weight = box["curr_weight"]
       fragile = items.any? { |item| item.fragile }
 
-      new_hash = { name: box_name, current_weight: box_weight, contains_fragile: fragile, items: items }
+      new_hash = { id: box["id"] , name: box_name, current_weight: box_weight, contains_fragile: fragile, items: items }
 
       if box_hash[:boxes]
         box_hash[:boxes] << new_hash
@@ -47,7 +50,9 @@ class OrdersController < ApplicationController
       end
     end
 
-    box_hash
+    print boxes_with_items
+
+    { hash: box_hash, json: boxes_with_items }
   end
 
 
