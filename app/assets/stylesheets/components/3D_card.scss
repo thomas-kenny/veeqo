@@ -25,5 +25,18 @@
 #three-container-close {
   position: absolute;
   bottom: 0;
+  color: #FFFFFF;
+  background-color: #009AED;
+  text-align: center;
   width: 100%;
+  min-height: 70px;
+  padding: 20px;
+  h3 {
+    margin: 0;
+    font-size: 20px;
+  }
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
 }
