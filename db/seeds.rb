@@ -30,7 +30,7 @@ Box.create(width: 400, depth: 330, height: 250, name: '10kg Box', weight_limit: 
 Box.create(width: 550, depth: 420, height: 330, name: '25kg Box', weight_limit: 25000)
 Box.create(width: 310, depth: 270, height: 30, name: 'Small Box 1', weight_limit: 4000)
 Box.create(width: 280, depth: 220, height: 100, name: 'Small Box 2', weight_limit: 4000)
-Box.create(width: 330, depth: 290, height: 50, name: 'Medium Box 1', weight_limit: 4000)
+Box.create(width: 330, depth: 290, height: 150, name: 'Medium Box 1', weight_limit: 4000)
 Box.create(width: 280, depth: 220, height: 100, name: 'Medium Box 2', weight_limit: 4000)
 Box.create(width: 440, depth: 310, height: 75, name: 'Large Box 1', weight_limit: 4000)
 Box.create(width: 280, depth: 220, height: 190, name: 'Large Box 2', weight_limit: 4000)
@@ -39,26 +39,28 @@ Box.create(width: 390, depth: 350, height: 700, name: 'Extra large Box 2', weigh
 
 puts "creating items"
 
-book = Item.create(name: 'Book', width: 148, depth: 210, height: 25, fragile: false, padding: 0, weight: 200)
-wine_glass = Item.create(name: 'Wine Glass', width: 80, depth: 230, height: 80, fragile: true, padding: 0, weight: 200)
-board_game = Item.create(name: 'Board Game', width: 300, depth: 300, height: 100, fragile: false, padding: 0, weight: 200)
-picture_frame = Item.create(name: 'Picture Frame', width: 100, depth: 250, height: 15, fragile: true, padding: 0, weight: 200)
+book = Item.create(name: 'Book', width: 148, depth: 210, height: 25, fragile: false, padding: 0, weight: 900)
+wine_glass = Item.create(name: 'Wine Glass', width: 80, depth: 230, height: 80, fragile: true, padding: 5, weight: 400)
+board_game = Item.create(name: 'Board Game', width: 300, depth: 300, height: 100, fragile: false, padding: 0, weight: 2000)
+picture_frame = Item.create(name: 'Picture Frame', width: 185, depth: 255, height: 35, fragile: true, padding: 0, weight: 1000)
 candle = Item.create(name: 'Candle', width: 20, depth: 150, height: 20, fragile: false, padding: 0, weight: 200)
-t_shirt = Item.create(name: 'T-shirt', width: 30, depth: 70, height: 20, fragile: false, padding: 0, weight: 200)
-paint_can = Item.create(name: 'Paint Can', width: 150, depth: 120, height: 150, fragile: false, padding: 0, weight: 5000)
+t_shirt = Item.create(name: 'T-shirt', width: 200, depth: 150, height: 10, fragile: false, padding: 0, weight: 200)
+paint_can = Item.create(name: 'Paint Can', width: 150, depth: 150, height: 200, fragile: false, padding: 0, weight: 5000)
+birthday_card = Item.create(name: 'Birthday Card', width: 125, depth: 230, height: 18, fragile: false, padding: 0, weight: 50)
+mini_fridge = Item.create(name: 'Mini Fridge', width: 500, depth: 400, height: 300, fragile: false, padding: 0, weight: 15000)
 
 puts "creating orders"
 
 order1 = Order.create(name: '#APR1030510579', note: 'Customer called in to ask for order to be gift wrapped.')
-order2 = Order.create(name: '#ATR1329508606', note: 'Leave parcel in garage')
+order2 = Order.create(name: '#ATR1329508606', note: 'Extra padding on the wine glass please')
 order3 = Order.create(name: '#APR1094869139')
 order4 = Order.create(name: '#AQQ1948012035')
-order5 = Order.create(name: '#ATS1290385018')
+order5 = Order.create(name: '#ATS1290385018', packed: true)
 
 puts "creating order items"
 
-OrderItem.create(item: book, order: order1)
-OrderItem.create(item: wine_glass, order: order1)
+OrderItem.create(item: paint_can, order: order1)
+OrderItem.create(item: mini_fridge, order: order1)
 
 OrderItem.create(item: book, order: order2)
 OrderItem.create(item: wine_glass, order: order2)
@@ -67,20 +69,16 @@ OrderItem.create(item: picture_frame, order: order2)
 OrderItem.create(item: board_game, order: order3)
 OrderItem.create(item: t_shirt, order: order3)
 
-OrderItem.create(item: book, order: order4)
-OrderItem.create(item: picture_frame, order: order4)
 OrderItem.create(item: candle, order: order4)
 OrderItem.create(item: candle, order: order4)
 OrderItem.create(item: t_shirt, order: order4)
 OrderItem.create(item: book, order: order4)
-OrderItem.create(item: picture_frame, order: order4)
 OrderItem.create(item: candle, order: order4)
 OrderItem.create(item: candle, order: order4)
 OrderItem.create(item: t_shirt, order: order4)
-OrderItem.create(item: book, order: order4)
-OrderItem.create(item: picture_frame, order: order4)
 OrderItem.create(item: candle, order: order4)
 OrderItem.create(item: candle, order: order4)
 OrderItem.create(item: t_shirt, order: order4)
+OrderItem.create(item: picture_frame, order: order4)
 
 OrderItem.create(item: paint_can, order: order5)
