@@ -53,7 +53,7 @@ puts "creating orders"
 
 order1 = Order.create(name: '#APR1030510579', note: 'Customer called in to ask for order to be gift wrapped.')
 order2 = Order.create(name: '#ATR1329508606', note: 'Extra padding on the wine glass please')
-order3 = Order.create(name: '#APR1094869139')
+order3 = Order.create(name: '#APR1094869139', packed: true)
 order4 = Order.create(name: '#AQQ1948012035')
 order5 = Order.create(name: '#ATS1290385018', packed: true)
 

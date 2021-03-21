@@ -1,7 +1,28 @@
-<div class="orders-list">
-  <h4>Orders to be shipped</h4>
+<div class="orders-list mt-2">
+  <h4>Unpacked orders</h4>
 </div>
-<% @orders.each do |order| %>
+<% @incomplete_orders.each do |order| %>
+  <%= link_to order_path(order) do %>
+      <div id="small-card">
+        <div class="card-product">
+          <div class="order-weight d-flex flex-column justify-content-between">
+            <h3><%= order.name %></h3>
+            <% sum = 0 %>
+            <% order.items.each { |item| sum += item.weight} %>
+            <p><%= sum/1000.0 %>kg</p>
+          </div>
+          <div class="card-product-infos d-flex flex-column align-items-end">
+            <p class="order-date"><%= order.created_at.strftime("%b %d, %Y") %></p>
+            <p class="order-time"><%= order.created_at.strftime("%H:%M") %></p>
+          </div>
+        </div>
+      </div>
+  <% end %>
+<% end %>
+<div class="orders-list mt-4">
+  <h4>Packed orders to be shipped</h4>
+</div>
+<% @complete_orders.each do |order| %>
   <%= link_to order_path(order) do %>
       <div id="small-card">
         <div class="card-product">
@@ -24,4 +45,3 @@
       </div>
   <% end %>
 <% end %>
-
