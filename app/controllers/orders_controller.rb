@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
     @order.update(packed: true)
     redirect_to orders_path
   end
-  
+
   private
 
   def get_packing_data(packing_containers, items)
