@@ -2573,8 +2573,9 @@ const threeDView = () => {
           var itemGeometry = new THREE.CubeGeometry(item.sp_size_1, item.sp_size_2, item.sp_size_3);
 
           var color = randomColor();
-
-          itemColorHash[item.id + " : " + item.sp_size] = color;
+          console.log(item)
+          itemColorHash[`${item.id} : ${item.sp_size_1}cm x ${item.sp_size_2}cm x ${item.sp_size_3}cm`] = color;
+          //itemColorHash[item.id + " : " + item.sp_size_1] = color;
 
           if (itemType == "normal")
             var itemMaterial = new THREE.MeshPhongMaterial({ color: color, shading: THREE.SmoothShading });
@@ -2619,7 +2620,7 @@ const threeDView = () => {
           var headerrow = document.createElement('tr');
           var headercell = document.createElement('td');
           headercell.colSpan = 3;
-          headercell.innerHTML = "contents legend";
+          headercell.innerHTML = "Items:";
 
           headerrow.appendChild(headercell);
           table.appendChild(headerrow);
@@ -2630,13 +2631,13 @@ const threeDView = () => {
 
           hrcell.appendChild(document.createElement('hr'));
           hrrow.appendChild(hrcell);
-          table.appendChild(hrrow);
+          // table.appendChild(hrrow);
 
           legend.appendChild(table);
 
           for (var key in itemColorHash) {
             if (itemColorHash.hasOwnProperty(key)) {
-
+              console.log(key)
               var row = document.createElement('tr');
               var key_cell = document.createElement('td');
               var sep_cell = document.createElement('td');
@@ -2666,7 +2667,8 @@ const threeDView = () => {
           }
 
           legend.style.position = 'absolute';
-          legend.style.top = '100px';
+          legend.style.top = '8px';
+          legend.style.left = '8px';
           legend.style.color = "#ffffff";
           legend.style.fontSize = "12px";
           legend.style.zIndex = 100;

@@ -37,6 +37,7 @@ class OrdersController < ApplicationController
       box["items"].each { |item| items << Item.find(item["id"]) }
 
       box_name = Box.find(box["id"]).name
+      box[:name] = box_name
       box_weight = box["curr_weight"]
       fragile = items.any? { |item| item.fragile }
 
@@ -48,6 +49,8 @@ class OrdersController < ApplicationController
         box_hash[:boxes] = [new_hash]
       end
     end
+
+    print boxes_with_items
 
     { hash: box_hash, json: boxes_with_items }
   end
