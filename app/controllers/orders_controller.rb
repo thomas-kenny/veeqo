@@ -5,7 +5,8 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :update]
 
   def index
-    @orders = Order.all
+    @complete_orders = Order.where(packed: true)
+    @incomplete_orders = Order.where(packed: false)
   end
 
   def show
@@ -38,7 +39,7 @@ class OrdersController < ApplicationController
         item_instance = Item.find(box_item["id"])
         box_item["name"] = item_instance.name
         items << item_instance
-      
+
       end
 
       box_name = Box.find(box["id"]).name
