@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import Detector from './Detector.js';
 
 const threeDView = () => {
   const threeDView = document.getElementById("threed-test");
@@ -22,7 +23,7 @@ const threeDView = () => {
         var packedBins = JSON.parse(threeDView.dataset.json);
         const binIdToRender = event.currentTarget.dataset.boxId;
 
-        // if (!Detector.webgl) Detector.addGetWebGLMessage();
+        if (!Detector.webgl) Detector.addGetWebGLMessage();
 
         var container;
         var camera, controls, scene, renderer;

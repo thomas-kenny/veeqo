@@ -44,3 +44,5 @@ var Detector = {
     parent.appendChild(element);
   }
 };
+
+export default Detector;
