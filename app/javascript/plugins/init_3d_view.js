@@ -3,10 +3,9 @@ import Detector from './Detector.js';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
 
 const threeDView = () => {
-  const threeDView = document.getElementById("threed-test");
+  const threeDContainer = document.getElementById('threed-container');
 
-  if (threeDView) {
-    const threeDContainer = document.getElementById('threed-container');
+  if (threeDContainer) {
     const threeDCloseButton = document.getElementById('three-container-close');
 
     threeDCloseButton.addEventListener("click", (event) => {
@@ -21,7 +20,7 @@ const threeDView = () => {
         threeDContainer.classList.toggle("d-none");
         threeDCloseButton.classList.toggle("d-none");
 
-        const packedBins = JSON.parse(threeDView.dataset.json);
+        const packedBins = JSON.parse(threeDContainer.dataset.json);
         const binIdToRender = event.currentTarget.dataset.boxId;
 
         if (!Detector.webgl) Detector.addGetWebGLMessage();
