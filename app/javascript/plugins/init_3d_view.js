@@ -204,13 +204,7 @@ const threeDView = () => {
               table.appendChild(row);
           });
 
-          legend.style.position = 'absolute';
-          legend.style.top = '8px';
-          legend.style.left = '8px';
-          legend.style.color = "#000000";
-          legend.style.fontSize = "12px";
-          legend.style.zIndex = 100;
-
+          legend.id = "threed-legend"
           container.appendChild(legend);
         }
 

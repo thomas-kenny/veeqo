@@ -23,3 +23,12 @@
     cursor: pointer;
   }
 }
+
+#threed-legend {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  color: #000;
+  font-size: 16px;
+  z-index: 100;
+}
