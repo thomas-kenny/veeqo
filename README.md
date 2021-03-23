@@ -7,7 +7,7 @@
 *-   When orders contain multiples of the same or different items it can be challenging for new packers to determine which package they should use.  
 -   If the wrong package is selected it can result in the retailer paying more than necessary for shipping (impacts profit margin) or the items can arrive damaged.
     
-*Using the combination of the known width, length, and height of all products in an order and if it contains fragile items, create a solution which determines what the most economical package combination should be used based on the packages that are available in the warehouse."
+*Using the combination of the known width, length, and height of all products in an order and if it contains fragile items, create a solution which determines what the most economical package combination should be used based on the packages that are available in the warehouse."*
 
 ## Solution
 In just over a day we designed and implemented a website for packaging staff. As the staff mostly use small devices, we designed the website for **mobile use**. Based on order information which contains item dimensions, the app uses an algorithm to show the user the smallest box/boxes they will need to pack the order. It also takes into consideration of items' weight and the box's weight limit. The algorithm also adds extra padding to fragile items to make sure they fit in the box. To help the user on how to pack the box, the app also contains **3D visualization** of the box and its items.
