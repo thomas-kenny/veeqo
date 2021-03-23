@@ -21,25 +21,24 @@ const threeDView = () => {
         threedContainer.classList.toggle("d-none");
         threedClose.classList.toggle("d-none");
 
-        var packedBins = JSON.parse(threeDView.dataset.json);
+        const packedBins = JSON.parse(threeDView.dataset.json);
         const binIdToRender = event.currentTarget.dataset.boxId;
 
         if (!Detector.webgl) Detector.addGetWebGLMessage();
 
-        var container;
-        var camera, controls, scene, renderer;
-        var cross;
-        var randomColorsUsedAlready = new Object();
-        var itemColorHash = new Array();
-        var itemType = "normal";
+        let container;
+        let camera, controls, scene, renderer;
+        let randomColorsUsedAlready = new Object();
+        let itemColorHash = new Array();
+        let itemType = "normal";
 
         init();
         animate();
 
         function init() {
-          var bin = null;
+          let bin = null;
           
-          for (var i = 0; i < packedBins.length; i++) {
+          for (let i = 0; i < packedBins.length; i++) {
             if (packedBins[i].id == binIdToRender) {
               bin = packedBins[i];
             }
@@ -120,7 +119,7 @@ const threeDView = () => {
         }
 
         function drawItems(scene, item) {
-          var is3sided = true;
+          let is3sided = true;
 
           if (item.sp_size_3 == undefined) {
             item.sp_size_3 = 0.25;
@@ -128,9 +127,9 @@ const threeDView = () => {
           }
 
           var itemGeometry = new THREE.BoxGeometry(item.sp_size_1, item.sp_size_2, item.sp_size_3);
-          var color = randomColor();
+          const color = randomColor();
 
-          let itemHash = {
+          const itemHash = {
                           title: `${item.name.charAt(0).toUpperCase() + item.name.slice(1)} : ${item.sp_size_1}cm x ${item.sp_size_2}cm x ${item.sp_size_3}cm`,
                           color: color
                           }
@@ -158,21 +157,22 @@ const threeDView = () => {
         }
 
         function randomColor() {
-          var color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+          let color = '#' + Math.floor(Math.random() * 16777215).toString(16);
           
           if ( color.length < 7 || randomColorsUsedAlready[color] == true)
-          randomColor();
+            randomColor();
           else
-          randomColorsUsedAlready[color] = true;
-          
+            randomColorsUsedAlready[color] = true;
+
+          console.log(color.length)
           return color;
         }
 
         function createLegend(binName, container) {
-          var legend = document.createElement('div');
-          var table = document.createElement('table');
-          var headerrow = document.createElement('tr');
-          var headercell = document.createElement('td');
+          let legend = document.createElement('div');
+          let table = document.createElement('table');
+          let headerrow = document.createElement('tr');
+          let headercell = document.createElement('td');
 
           headercell.colSpan = 3;
           headercell.innerHTML =`${binName}'s items:`;
@@ -186,13 +186,13 @@ const threeDView = () => {
 
           itemColorHash.forEach((itemHash) => {
 
-              var row = document.createElement('tr');
-              var key_cell = document.createElement('td');
-              var color_cell = document.createElement('td');
+              let row = document.createElement('tr');
+              let key_cell = document.createElement('td');
+              let color_cell = document.createElement('td');
 
               key_cell.innerHTML = itemHash.title;
 
-              var color_div = document.createElement('span');
+              let color_div = document.createElement('span');
               color_div.style.height = '10px'
               color_div.style.width = '10px'
               color_div.style.background = itemHash.color;
