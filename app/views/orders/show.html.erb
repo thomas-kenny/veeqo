@@ -1,5 +1,3 @@
-<div id="threed-test" data-json="<%= @box_json.to_json %>" ></div>
-
 <% if @order.note %>
   <div class="note">
     <p class="note-text"><span>Note from customer:</span> <%= @order.note %></p>
@@ -11,7 +9,7 @@
     <div class="items">
       <div class="threed-card collapse" id="collapse<%= box[:name].gsub(" ", "") %>" data-parent="#boxesAccordion">
         <i class="fas fa-cube"></i>
-        <p id="threed" class="threed-button" type="button" data-box-id="<%= box[:id] %>">3D View</p>
+        <p class="threed-button" type="button" data-box-id="<%= box[:id] %>">3D View</p>
       </div>
       <% box[:items].each do |item| %>
         <%= render 'shared/item_card', :locals => {item: item, box: box} %>
@@ -20,5 +18,5 @@
   <% end %>
 </div>
 
-<%= render '3d_view' %>
+<%= render '3d_view', bin_data: @box_json.to_json %>
 

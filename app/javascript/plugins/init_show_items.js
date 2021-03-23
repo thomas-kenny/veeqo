@@ -8,7 +8,9 @@ const showItems = () => {
         const id = event.currentTarget.dataset.boxcardId;
         //const dropdown = document.querySelector(`#${id}`);
         const dropdown = document.querySelector("#id_1");
-        dropdown.classList.toggle("d-none");
+        if (dropdown) {
+          dropdown.classList.toggle("d-none");
+        }
       });
     });
   }
