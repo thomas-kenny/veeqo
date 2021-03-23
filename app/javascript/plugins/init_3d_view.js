@@ -2345,15 +2345,14 @@ THREE.TrackballControls = function (object, domElement) {
 THREE.TrackballControls.prototype = Object.create(THREE.EventDispatcher.prototype);
 
 var Detector = {
-
   canvas: !!window.CanvasRenderingContext2D,
   webgl: (function () { try { return !!window.WebGLRenderingContext && !!document.createElement('canvas').getContext('experimental-webgl'); } catch (e) { return false; } })(),
   workers: !!window.Worker,
   fileapi: window.File && window.FileReader && window.FileList && window.Blob,
 
   getWebGLErrorMessage: function () {
-
     var element = document.createElement('div');
+
     element.id = 'webgl-error-message';
     element.style.fontFamily = 'monospace';
     element.style.fontSize = '13px';
@@ -2366,7 +2365,6 @@ var Detector = {
     element.style.margin = '5em auto 0';
 
     if (!this.webgl) {
-
       element.innerHTML = window.WebGLRenderingContext ? [
         'Your graphics card does not seem to support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation" style="color:#000">WebGL</a>.<br />',
         'Find out how to get it <a href="http://get.webgl.org/" style="color:#000">here</a>.'
@@ -2374,15 +2372,11 @@ var Detector = {
         'Your browser does not seem to support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation" style="color:#000">WebGL</a>.<br/>',
         'Find out how to get it <a href="http://get.webgl.org/" style="color:#000">here</a>.'
       ].join('\n');
-
     }
-
     return element;
-
   },
 
   addGetWebGLMessage: function (parameters) {
-
     var parent, id, element;
 
     parameters = parameters || {};
@@ -2394,9 +2388,7 @@ var Detector = {
     element.id = id;
 
     parent.appendChild(element);
-
   }
-
 };
 
 
@@ -2416,7 +2408,6 @@ const threeDView = () => {
 
     buttons.forEach((button) => {
       button.addEventListener("click", (event) => {
-
         threedContainer.classList.toggle("d-none");
         threedClose.classList.toggle("d-none");
 
@@ -2436,8 +2427,8 @@ const threeDView = () => {
         animate();
 
         function init() {
-
           var bin = null;
+          
           for (var i = 0; i < packedBins.length; i++) {
             if (packedBins[i].id == binIdToRender) {
               bin = packedBins[i];
@@ -2470,6 +2461,7 @@ const threeDView = () => {
 
           controls.addEventListener('change', render);
 
+
           // world
           scene = new THREE.Scene();
           scene.fog = new THREE.FogExp2(0xffffff, 0.002);
@@ -2491,7 +2483,6 @@ const threeDView = () => {
 
 
           // lights
-
           var ambientLight = new THREE.AmbientLight(0x444444);
           scene.add(ambientLight);
 
@@ -2506,7 +2497,6 @@ const threeDView = () => {
 
 
           // renderer
-
           renderer = new THREE.WebGLRenderer({ antialias: false });
           renderer.setClearColor(scene.fog.color, 1);
           // renderer.setSize(window.innerWidth, window.innerHeight);
@@ -2520,11 +2510,9 @@ const threeDView = () => {
           createLegend(bin.name, container);
           
           // window.addEventListener('resize', onWindowResize, false);
-
         }
 
         function drawItems(scene, item) {
-
           var is3sided = true;
 
           if (item.sp_size_3 == undefined) {
@@ -2533,7 +2521,6 @@ const threeDView = () => {
           }
 
           var itemGeometry = new THREE.CubeGeometry(item.sp_size_1, item.sp_size_2, item.sp_size_3);
-
           var color = randomColor();
 
           let itemHash = {
@@ -2563,9 +2550,7 @@ const threeDView = () => {
             scene.add(itemMesh);
         }
 
-
         function randomColor() {
-
           var color = '#' + Math.floor(Math.random() * 16777215).toString(16);
 
           if (randomColorsUsedAlready[color] == true)
@@ -2600,7 +2585,6 @@ const threeDView = () => {
 
               key_cell.innerHTML = itemHash.title;
 
-
               var color_div = document.createElement('span');
               color_div.style.height = '10px'
               color_div.style.width = '10px'
@@ -2626,7 +2610,6 @@ const threeDView = () => {
         }
 
         function onWindowResize() {
-
           camera.aspect = window.innerWidth / window.innerHeight;
           camera.updateProjectionMatrix();
 
