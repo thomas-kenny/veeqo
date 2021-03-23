@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import Detector from './Detector.js';
+import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
 
 const threeDView = () => {
   const threeDView = document.getElementById("threed-test");
@@ -57,28 +58,28 @@ const threeDView = () => {
           camera.position.y = (bin.size_1 + bin.size_2 + bin.size_3) * .7;
           camera.position.z = (bin.size_1 + bin.size_2 + bin.size_3) * .7;
 
-          //controls = new THREE.TrackballControls(camera);
+          controls = new TrackballControls(camera, threedContainer);
 
-          // controls.rotateSpeed = 1.0;
-          // controls.zoomSpeed = 1.2;
-          // controls.panSpeed = 0.8;
-          // controls.noZoom = false;
-          // controls.noPan = false;
-          // controls.staticMoving = true;
-          // controls.dynamicDampingFactor = 0.3;
-          // controls.keys = [65, 83, 68];
+          controls.rotateSpeed = 1.0;
+          controls.zoomSpeed = 1.2;
+          controls.panSpeed = 0.8;
+          controls.noZoom = false;
+          controls.noPan = false;
+          controls.staticMoving = true;
+          controls.dynamicDampingFactor = 0.3;
+          controls.keys = [65, 83, 68];
 
-          // controls.addEventListener('change', render);
+          controls.addEventListener('change', render);
 
 
           // world
           scene = new THREE.Scene();
           scene.fog = new THREE.FogExp2(0xffffff, 0.002);
 
-          var binGeometry = new THREE.BoxGeometry(bin.size_1, bin.size_2, bin.size_3);
-          var binMaterial = new THREE.MeshPhongMaterial({ color: 0x000000, wireframe: true });
+          let binGeometry = new THREE.BoxGeometry(bin.size_1, bin.size_2, bin.size_3);
+          let binMaterial = new THREE.MeshPhongMaterial({ color: 0x000000, wireframe: true });
 
-          var binMesh = new THREE.Mesh(binGeometry, binMaterial);
+          let binMesh = new THREE.Mesh(binGeometry, binMaterial);
           binMesh.position.x = 0;
           binMesh.position.y = 0;
           binMesh.position.z = 0;
@@ -86,21 +87,21 @@ const threeDView = () => {
           binMesh.matrixAutoUpdate = false;
           scene.add(binMesh);
 
-          for (var i = 0; i < bin.items.length; ++i) {
+          for (let i = 0; i < bin.items.length; ++i) {
             drawItems(scene, bin.items[i]);
           }
 
 
           // lights
-          var ambientLight = new THREE.AmbientLight(0x444444);
+          let ambientLight = new THREE.AmbientLight(0x444444);
           scene.add(ambientLight);
 
-          var pointLight = new THREE.PointLight(0xffffff, 1.25, 1000);
+          let pointLight = new THREE.PointLight(0xffffff, 1.25, 1000);
           pointLight.position.set(0, 0, 600);
 
           scene.add(pointLight);
 
-          var directionalLight = new THREE.DirectionalLight(0xffffff);
+          let directionalLight = new THREE.DirectionalLight(0xffffff);
           directionalLight.position.set(1, -0.5, -1);
           scene.add(directionalLight);
 
@@ -234,7 +235,7 @@ const threeDView = () => {
 
         function animate() {
           requestAnimationFrame(animate);
-          //controls.update();
+          controls.update();
         }
 
         function render() {
