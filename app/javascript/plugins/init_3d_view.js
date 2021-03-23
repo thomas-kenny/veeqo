@@ -99,21 +99,17 @@ const threeDView = () => {
           pointLight.position.set(0, 0, 600);
           scene.add(pointLight);
           
-
           // renderer
           renderer = new THREE.WebGLRenderer({ antialias: true });
           renderer.setClearColor(scene.fog.color, 1);
-          // renderer.setSize(window.innerWidth, window.innerHeight);
-          // renderer.setSize(414, 736);
-          renderer.setSize(414, 720);
+          renderer.setSize(window.innerWidth, window.innerHeight);
 
-          container = document.getElementById('threed-container');
-          container.innerHTML = "";
-          container.appendChild(renderer.domElement);
+          threedContainer.innerHTML = "";
+          threedContainer.appendChild(renderer.domElement);
           
-          createLegend(bin.name, container);
+          createLegend(bin.name, threedContainer);
           
-          // window.addEventListener('resize', onWindowResize, false);
+          window.addEventListener('resize', onWindowResize, false);
 
           render();
         }
@@ -159,12 +155,11 @@ const threeDView = () => {
         function randomColor() {
           let color = '#' + Math.floor(Math.random() * 16777215).toString(16);
           
-          if ( color.length < 7 || randomColorsUsedAlready[color] == true)
+          if ( color.length < 7 || randomColorsUsedAlready[color] == true){
             randomColor();
-          else
-            randomColorsUsedAlready[color] = true;
-
-          console.log(color.length)
+          }
+          
+          randomColorsUsedAlready[color] = true;
           return color;
         }
 
@@ -225,7 +220,6 @@ const threeDView = () => {
           controls.handleResize();
 
           render();
-
         }
 
         function animate() {
