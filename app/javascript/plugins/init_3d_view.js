@@ -6,27 +6,26 @@ const threeDView = () => {
   const threeDView = document.getElementById("threed-test");
 
   if (threeDView) {
-    const threedContainer = document.getElementById('threed-container');
-    const threedClose = document.getElementById('three-container-close');
+    const threeDContainer = document.getElementById('threed-container');
+    const threeDCloseButton = document.getElementById('three-container-close');
 
-    threedClose.addEventListener("click", (event) => {
-      threedContainer.classList.toggle("d-none");
-      threedClose.classList.toggle("d-none");
+    threeDCloseButton.addEventListener("click", (event) => {
+      threeDContainer.classList.toggle("d-none");
+      threeDCloseButton.classList.toggle("d-none");
     });
 
     const buttons = document.querySelectorAll(".threed-button");
 
     buttons.forEach((button) => {
       button.addEventListener("click", (event) => {
-        threedContainer.classList.toggle("d-none");
-        threedClose.classList.toggle("d-none");
+        threeDContainer.classList.toggle("d-none");
+        threeDCloseButton.classList.toggle("d-none");
 
         const packedBins = JSON.parse(threeDView.dataset.json);
         const binIdToRender = event.currentTarget.dataset.boxId;
 
         if (!Detector.webgl) Detector.addGetWebGLMessage();
 
-        let container;
         let camera, controls, scene, renderer;
         let randomColorsUsedAlready = new Object();
         let itemColorHash = new Array();
@@ -57,7 +56,7 @@ const threeDView = () => {
           camera.position.y = (bin.size_1 + bin.size_2 + bin.size_3) * .7;
           camera.position.z = (bin.size_1 + bin.size_2 + bin.size_3) * .7;
 
-          controls = new TrackballControls(camera, threedContainer);
+          controls = new TrackballControls(camera, threeDContainer);
 
           controls.rotateSpeed = 1.0;
           controls.zoomSpeed = 1.2;
@@ -104,10 +103,10 @@ const threeDView = () => {
           renderer.setClearColor(scene.fog.color, 1);
           renderer.setSize(window.innerWidth, window.innerHeight);
 
-          threedContainer.innerHTML = "";
-          threedContainer.appendChild(renderer.domElement);
+          threeDContainer.innerHTML = "";
+          threeDContainer.appendChild(renderer.domElement);
           
-          createLegend(bin.name, threedContainer);
+          createLegend(bin.name, threeDContainer);
           
           window.addEventListener('resize', onWindowResize, false);
 
