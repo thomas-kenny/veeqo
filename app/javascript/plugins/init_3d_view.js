@@ -94,8 +94,13 @@ const threeDView = () => {
           scene.add(ambientLight);
 
           let pointLight = new THREE.PointLight(0xffffff, 1.5, 1000);
-          pointLight.position.set(0, 0, 600);
+          pointLight.position.set(0, 100, 600);
+
+          let secondPointLight = new THREE.PointLight(0xffffff, 1.5, 1000);
+          secondPointLight.position.set(0, 100, -600);
+
           scene.add(pointLight);
+          scene.add(secondPointLight);
           
           // renderer
           renderer = new THREE.WebGLRenderer({ antialias: true });
