@@ -93,18 +93,13 @@ const threeDView = () => {
 
 
           // lights
-          let ambientLight = new THREE.AmbientLight(0x444444);
+          let ambientLight = new THREE.AmbientLight(0x999999);
           scene.add(ambientLight);
 
-          let pointLight = new THREE.PointLight(0xffffff, 1.25, 1000);
+          let pointLight = new THREE.PointLight(0xffffff, 1.5, 1000);
           pointLight.position.set(0, 0, 600);
-
           scene.add(pointLight);
-
-          let directionalLight = new THREE.DirectionalLight(0xffffff);
-          directionalLight.position.set(1, -0.5, -1);
-          scene.add(directionalLight);
-
+          
 
           // renderer
           renderer = new THREE.WebGLRenderer({ antialias: true });
