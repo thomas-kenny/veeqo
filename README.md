@@ -4,8 +4,8 @@
 
 *"One problem that is faced often within companies who use Veeqo is that after products have been picked in the warehouse, packers need to determine which size parcel best suits the order:*
 
-*-   When orders contain multiples of the same or different items it can be challenging for new packers to determine which package they should use.  
--   If the wrong package is selected it can result in the retailer paying more than necessary for shipping (impacts profit margin) or the items can arrive damaged.*
+-   *When orders contain multiples of the same or different items it can be challenging for new packers to determine which package they should use.*  
+-   *If the wrong package is selected it can result in the retailer paying more than necessary for shipping (impacts profit margin) or the items can arrive damaged.*
     
 *Using the combination of the known width, length, and height of all products in an order and if it contains fragile items, create a solution which determines what the most economical package combination should be used based on the packages that are available in the warehouse."*
 
