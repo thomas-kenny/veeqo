@@ -182,13 +182,13 @@ const threeDView = () => {
 
         function randomColor() {
           // create a random number (256^3) and convert to hex
-          let color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+          let color = '';
           
-          // if the hex number is invalid or the colour has already been used, recreate the colour
-          if (color.length < 7 || randomColorsUsedAlready[color] == true) {
-            randomColor();
-          }
-          
+          do {
+            color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            // if the hex number is invalid or the colour has already been used, recreate the colour
+          } while (color.length < 7 || randomColorsUsedAlready[color] == true)
+
           // add the colour to the hash and return
           randomColorsUsedAlready[color] = true;
           return color;
