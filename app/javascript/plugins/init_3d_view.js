@@ -29,7 +29,9 @@ const threeDView = () => {
         const binIdToRender = event.currentTarget.dataset.boxId;
 
         // if browser does not support WebGL throw a error message
-        if (!Detector.webgl) Detector.addGetWebGLMessage();
+        if (!Detector.webgl) {
+          Detector.addGetWebGLMessage();
+        }
 
         // pre-initialise
         let camera, controls, scene, renderer;
@@ -55,8 +57,9 @@ const threeDView = () => {
             return;
           }
 
-          if (bin.size_3 == undefined)
+          if (bin.size_3 == undefined) {
             bin.size_3 = 0.25;
+          }
 
           // create camera and 3d view controls (mouse interaction)
           camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
@@ -146,20 +149,21 @@ const threeDView = () => {
           // make a hash based on the item's name and the colour we generated, and push it to the array
           // we made at the start. The createLegend function will use this data
           const itemHash = {
-                          title: `${item.name.charAt(0).toUpperCase() + item.name.slice(1)} : ${item.sp_size_1}cm x ${item.sp_size_2}cm x ${item.sp_size_3}cm`,
-                          color: color
-                          }
+                            title: `${item.name.charAt(0).toUpperCase() + item.name.slice(1)} : ${item.sp_size_1}cm x ${item.sp_size_2}cm x ${item.sp_size_3}cm`,
+                            color: color
+                           }
           itemColorHash.push(itemHash)
 
           // define item material
           // right now the item material is always normal and we have no functionality for the 
           // user to change between the modes, however, it is here for future use if want it
-          if (itemType == "normal")
+          if (itemType == "normal") {
             var itemMaterial = new THREE.MeshPhongMaterial({ color: color });
-          else if (itemType == "wireframe")
+          } else if (itemType == "wireframe") {
             var itemMaterial = new THREE.MeshPhongMaterial({ color: color, wireframe: true });
-          else if (itemType == "transparent")
+          } else if (itemType == "transparent") {
             var itemMaterial = new THREE.MeshPhongMaterial({ color: color, transparent: true, opacity: 0.8 });
+          }
 
           itemMaterial.name = item.id;
             
@@ -167,8 +171,9 @@ const threeDView = () => {
           itemMesh.position.x = item.x_origin_in_bin;
           itemMesh.position.y = item.y_origin_in_bin;
 
-          if (is3sided){}
+          if (is3sided) {
             itemMesh.position.z = item.z_origin_in_bin;
+          }
 
           itemMesh.updateMatrix();
           itemMesh.matrixAutoUpdate = false;
@@ -180,7 +185,7 @@ const threeDView = () => {
           let color = '#' + Math.floor(Math.random() * 16777215).toString(16);
           
           // if the hex number is invalid or the colour has already been used, recreate the colour
-          if ( color.length < 7 || randomColorsUsedAlready[color] == true){
+          if (color.length < 7 || randomColorsUsedAlready[color] == true) {
             randomColor();
           }
           
