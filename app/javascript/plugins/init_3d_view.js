@@ -54,14 +54,8 @@ const threeDView = () => {
           return color;
         }
 
-        function drawItems(scene, item) {
-          let is3sided = true;
-
-          if (item.sp_size_3 === undefined) {
-            item.sp_size_3 = 0.25;
-            is3sided = false;
-          }
-
+        function drawItems(item) {
+          // eslint-disable-next-line max-len
           const itemGeometry = new THREE.BoxGeometry(item.sp_size_1, item.sp_size_2, item.sp_size_3);
           const color = randomColor();
 
@@ -77,12 +71,14 @@ const threeDView = () => {
           // define item material
           // right now the item material is always normal and we have no functionality for the
           // user to change between the modes, however, it is here for future use if want it
+          let itemMaterial;
+
           if (itemType === 'normal') {
-            var itemMaterial = new THREE.MeshPhongMaterial({ color });
+            itemMaterial = new THREE.MeshPhongMaterial({ color });
           } else if (itemType === 'wireframe') {
-            var itemMaterial = new THREE.MeshPhongMaterial({ color, wireframe: true });
+            itemMaterial = new THREE.MeshPhongMaterial({ color, wireframe: true });
           } else if (itemType === 'transparent') {
-            var itemMaterial = new THREE.MeshPhongMaterial({ color, transparent: true, opacity: 0.8 });
+            itemMaterial = new THREE.MeshPhongMaterial({ color, transparent: true, opacity: 0.8 });
           }
 
           itemMaterial.name = item.id;
@@ -90,10 +86,7 @@ const threeDView = () => {
           const itemMesh = new THREE.Mesh(itemGeometry, itemMaterial);
           itemMesh.position.x = item.x_origin_in_bin;
           itemMesh.position.y = item.y_origin_in_bin;
-
-          if (is3sided) {
-            itemMesh.position.z = item.z_origin_in_bin;
-          }
+          itemMesh.position.z = item.z_origin_in_bin;
 
           itemMesh.updateMatrix();
           itemMesh.matrixAutoUpdate = false;
@@ -178,10 +171,7 @@ const threeDView = () => {
             }
           }
 
-          if (bin == null) {
-            alert('Error. Could not find bin');
-            return;
-          }
+          if (bin == null) return;
 
           if (bin.size_3 === undefined) {
             bin.size_3 = 0.25;
@@ -225,7 +215,7 @@ const threeDView = () => {
 
           // iterate over each of the items and draw them to the scene
           for (let i = 0; i < bin.items.length; i += 1) {
-            drawItems(scene, bin.items[i]);
+            drawItems(bin.items[i]);
           }
 
           // lights
