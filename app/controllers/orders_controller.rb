@@ -2,6 +2,7 @@ require 'net/http'
 require 'json'
 
 class OrdersController < ApplicationController
+  skip_before_action :authenticate_user!
   before_action :set_order, only: [:show, :update]
 
   def index
